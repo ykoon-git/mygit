@@ -1,0 +1,7 @@
+log.log
+
+*.log
+
+/ignorefolder
+/node_modules
+/.php
