@@ -1,0 +1,26 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: default
+  name: pod-viewer
+rules:
+- apiGroups: [""] #""는 핵심 api 그룹을 나타냄
+  resources: ["pods"]
+  verbs: ["get", "watch", "list"]
+
+--------------------------------------------
+
+kind: RoleBinding 
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: noc-helpdesk-view
+  namespace: default
+subjects:
+- kind: User
+  name: helpdeskuser@example.com
+  apiGroup: rbac.autorization.k8s.io
+roleRef:
+  kind: Role #Role 또는 ClusterRole 중 하나
+  name: pod-viewer # 이것은 바인딩된 Role 또는 ClusterRole의 이름과 일치해야 합니다. 위 Role 에서 정의된 이름과 권한을. ... 
+  apiGroup: rbac.authorization.k8s.io
+
