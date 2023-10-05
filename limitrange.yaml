@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: team-1-limit-range
+spec:
+  limits:
+  - default:
+      memory: 512Mi
+    defaultRequest:
+      memory: 256Mi
+    type: Container
