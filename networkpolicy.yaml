@@ -1,0 +1,59 @@
+apiVersion: networking.k8s.io/va
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress 
+
+---
+apiVersion: networking.k8s.io/va
+kind: NetworkPolicy
+metadata:
+  name: webaccess
+spec:
+  podSelector: 
+    matchLabels:
+      tier: "web"
+  policyTypes:
+  - Ingress 
+  ingress:
+  - {}
+
+---
+apiVersion: networking.k8s.io/va
+kind: NetworkPolicy
+metadata:
+  name: allow-api-access
+spec:
+  podSelector: 
+    matchLabels:
+      tier: "api"
+  policyTypes:
+  - Ingress 
+  ingress:
+  - from:
+    - podSelector:
+      matchLabels:
+        tier: "web"
+
+
+---
+apiVersion: networking.k8s.io/va
+kind: NetworkPolicy
+metadata:
+  name: allow-db-access
+spec:
+  podSelector:
+    matchLabels:
+      tier: "db"
+  policyTypes:
+  - Ingress 
+  ingress:
+  - from:
+    - podSelector:
+      matchLabels:
+        tier: "api"
+
+

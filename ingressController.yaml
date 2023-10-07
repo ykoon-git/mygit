@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: labs-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  tls:
+  - hosts:
+      - "www.evillgenius.com"
+    secretName: secret-tls
+  rules:
+  - host: www.evillgenius.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/registration"
+        backend:
+          service:
+            name: reg-svc
+            port: 
+              number: 8088
+      - pathType: Prefix
+        path: "/labaccess"
+        backend:
+          service:
+            name: labaccess-svc
+            port: 
+              number: 8089
