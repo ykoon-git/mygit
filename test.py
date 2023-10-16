@@ -1,17 +1,11 @@
-a = 1 
-b = 2
+import pandas as pd
+import seaborn as sns
+import numpy as np
 
-print(a + b)
+df = pd.read_csv("https://raw.githubusercontent.com/noahgift/regression-concepts/master/height-weight-25k.csv")
 
-def printvariable(a, b):
-    print(a + b)
 
-def addvariable(a, b):
-    return a + b
 
-printvariable(a, b)
-
-c = addvariable(a,b)
-
-print(c)
+sns.lmplot(x="Height", y="Weight", data=df)
+sns.lmplot(x="Height", y="Weight", data=df, hue="Gender")
 
