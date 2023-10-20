@@ -1,11 +1,8 @@
-import sys
-import pandas as pd
+import pandas as pd 
+from ludwig.api import LudwigModel
 
-argument = sys.argv[-1]
+df = pd.read_csv('rotten_tomatos.csv')
+model = LudwigModel(config='config.yaml')
 
-df = pd.read_csv(argument)
-
-print(df.describe())
-
-print(df.info)
+results = model.train(dataset=df)
 
