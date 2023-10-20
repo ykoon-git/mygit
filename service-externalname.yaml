@@ -8,3 +8,19 @@ spec:
   externalName: mymongodb.documents.azure.com
 
   
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: web
+  ports:
+  - port: 80
+    targetPort: 8081
+  loadBalancerIP: 13.12.21.31
+  loadBalancerSourceRanges:
+  - "142.43.0.0/16"
